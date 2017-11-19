@@ -1,0 +1,2 @@
+# Lecture-Search-LECSE
+LECSE is a Java project that uses Speech to Text technology to translate and organize recorded school courses or meetings. The system only takes in .wav files and uses Google Services to obtain the speech to text response. It is also a great way to keep track of course material and follow along the audio as you read through the notes.
