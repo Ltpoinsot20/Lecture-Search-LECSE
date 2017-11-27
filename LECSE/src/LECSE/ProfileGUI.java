@@ -1,6 +1,3 @@
-//plz
-package LECSE;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.ComponentOrientation;
@@ -26,16 +23,24 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
-public class ProfileGUI {
+/**
+ * @author Sigrid and Alex
+ * @ This class is a JPanel that contains all the components of the profile page
+ */
+public class ProfileGUI extends JPanel {
 
-
-	public static void main(String[] args) throws FileNotFoundException, IOException{
+	/**
+	 * @param frame is the main frame that is used to display the ProfileGUI JPanel
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
+	public ProfileGUI(JFrame frame) throws FileNotFoundException, IOException {
 		//Load the database
 		Database db = new Database();		
 		db.loadUserInfo();
 		db.loadCourseInstructor();
 		db.loadLectures();
-		
+
 		//Create a text field for the name 
 		JTextField name = new JTextField(db.getName());
 		name.setEditable(false);
@@ -258,8 +263,7 @@ public class ProfileGUI {
 		gbc.insets = new Insets(20, 10, 0, 0);
 		p.add(menu, gbc);
 		
-		
-		//Create a button 
+		//Create a button for the help page
 		JButton help = new JButton("HELP");
 		help.setPreferredSize(new Dimension(100,30));
 		help.setFont(new Font("Segoe UI", Font.PLAIN, 20));
@@ -269,8 +273,7 @@ public class ProfileGUI {
 				//Create Help page here!!!!!!!!!!!!!!!
 			}
 		});
-		
-		
+				
 		JPanel p3 = new JPanel(new GridBagLayout());
 		p3.setPreferredSize(new Dimension(400,900));
 		GridBagConstraints gbc3 = new GridBagConstraints();
@@ -283,8 +286,32 @@ public class ProfileGUI {
 		p3.setBackground(Color.white);
 		p3.add(help, gbc3);
 		
+		//Create a button to switch to mediaGUI
+		JButton changePanel = new JButton("Media");
+		changePanel.setPreferredSize(new Dimension(100,30));
+		changePanel.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+		changePanel.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//Code to switch panel here
+				try {
+					MediaGUI mg = new MediaGUI(frame);
+					frame.getContentPane().removeAll();
+					frame.getContentPane().add(mg);
+					frame.revalidate();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+			
+		gbc3.gridx = 1;
+		p3.add(changePanel, gbc3);
+		
+		gbc3.gridx = 0;
 		gbc3.gridy++;
-		gbc3.insets = new Insets(55, 0, 0, 0);
+		gbc3.insets = new Insets(54, 0, 0, 0);
 		p3.add(title4, gbc3);
 
 		//Get the array of courses and instructors
@@ -299,8 +326,8 @@ public class ProfileGUI {
 				gbc3.insets = new Insets(0, 0, 0, 0);
 				p3.add(instructor, gbc3);
 			}
-			//Max show 8 instructors
-			if(i == 7) {
+			//Max show 12 instructors
+			if(i == 11) {
 				i = ci.length;
 			}
 		}
@@ -318,8 +345,8 @@ public class ProfileGUI {
 				gbc3.insets = new Insets(0, 0, 0, 0);
 				p3.add(course, gbc3);
 			}
-			//Max show 8 courses
-			if(i == 7) {
+			//Max show 12 courses
+			if(i == 11) {
 				i = ci.length;
 			}
 		}
@@ -327,19 +354,12 @@ public class ProfileGUI {
 		JLabel empty = new JLabel();
 		gbc3.weighty = 1;
 		p3.add(empty, gbc3);
-
 		
-		JFrame frame = new JFrame();
-		frame.setSize(950, 1000);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLayout(new FlowLayout()); 
-		frame.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-		frame.add(p);
-		frame.add(p3);
-		frame.getContentPane().setBackground(Color.white);
-		frame.setResizable(true);
-		frame.setLocationRelativeTo(null);
-		frame.setVisible(true);
+		setLayout(new FlowLayout());
+		setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		add(p);
+		add(p3);
+		setBackground(Color.white);
 	}
-}
 
+}
