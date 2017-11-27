@@ -1,3 +1,5 @@
+package LECSE;
+
 import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.FlowLayout;
