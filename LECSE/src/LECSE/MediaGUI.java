@@ -1,5 +1,4 @@
 package LECSE;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -7,10 +6,6 @@ import java.util.ArrayList;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineEvent;
-import javax.sound.sampled.LineListener;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -326,125 +321,12 @@ public class MediaGUI extends JPanel
 				ex.printStackTrace();
 			}
 
-
 		});
 		c.gridx = 1;
 		c.gridy = 4;
 		add(button,c);
 	}
 	
-
-	// BEGIN AUDIO METHODS SECTION
-
-	//find sound clip
-
-
-
-	// load the sound into a clip
-	//DataLine.Info info = new DataLine.Info(Clip.class, sound.getFormat());
-
-	//Clip clip = (Clip) AudioSystem.getLine(info);
-
-	/**
-	 * Plays audio in the 
-	 * @param fileName Audio File name
-	 * @param clip Audio clip
-	 */
-	public void playAudio(String fileName, Clip clip) // Removed static from everything, added Clip input
-	{
-		//choose the sound (moved into method)
-		File soundFile = new File(fileName);
-		AudioInputStream sound = null;
-
-		try
-		{
-			sound = AudioSystem.getAudioInputStream(soundFile);
-		}
-		catch (UnsupportedAudioFileException e1)
-		{
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		catch (IOException e1)
-		{
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-
-		try
-		{
-			clip.open(sound);
-		}
-		catch (LineUnavailableException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		catch (IOException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		// play sound
-		clip.start();
-	}
-
-	/**
-	 * @param fileName
-	 */
-	public void stopAudio(String fileName, Clip clip)
-	{
-		//exit the player when sound has stopped
-		clip.addLineListener(new LineListener()
-		{
-			public void update(LineEvent event)
-			{
-				if (event.getType() == LineEvent.Type.STOP)
-				{
-					event.getLine().close();
-					//System.exit(0); Closes the entire program
-				}
-			}
-		});
-	}
-
-	/**
-	 * Pauses/Starts playing audio
-	 * @param Audio File
-	 * @param clip Audio from file put into Clip
-	 */
-	public void pauseAudio(String fileName, Clip clip)
-	{
-		// pause audio when selected - do not exit out of player
-		clip.addLineListener(new LineListener()
-		{
-			public void update(LineEvent event)
-			{
-				if (event.getType() == LineEvent.Type.STOP)
-				{
-					try
-					{
-						event.getLine().wait();
-					}
-					catch (InterruptedException e)
-					{
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					clip.stop();
-				}
-				if (event.getType() == LineEvent.Type.START) // Is this if supposed to be inside previous if?
-				{
-					event.getLine().notify();
-					clip.start();
-				}
-
-			}
-		});
-	}
-	// END AUDIO METHODS SECTION
-
-
 	/**
 	 * Reads the text from a text file and returns the words as a string
 	 * @param fileName The name of the file to be read from
@@ -541,12 +423,6 @@ public class MediaGUI extends JPanel
 		}
 	}
 
-	public void stopAudio()
-	{
-
-	}
-
-
 	/**
 	 * Uploads an audio file to the system.
 	 * @param fileName Name of the file to be uploaded.
@@ -569,5 +445,4 @@ public class MediaGUI extends JPanel
 
 		return in;
 	}
-
 }
