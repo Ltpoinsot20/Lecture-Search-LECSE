@@ -22,6 +22,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
@@ -265,6 +266,22 @@ public class ProfileGUI extends JPanel {
 		gbc.insets = new Insets(20, 10, 0, 0);
 		p.add(menu, gbc);
 		
+		//Create a JTextArea for the help page
+				JTextArea HelpText = new JTextArea("LECSE is a program that allows the user to "
+						+ "upload an audio file of a lecture and receive a transmitted text receipt"
+						+ "of the lecture.\n\n"
+						+ "To begin, the user must set up a profile.\n\n"
+						+ "To upload a lecture, click the upload button found in the media page, browse your files, "
+						+ "and select the .wav file of the lecture you wish to upload.\n\n"
+						+ "You must enter in the name of the lecture, course, instructor, and date. "
+						+ "This information will be used in saving the lecture to the system so that you may access it later.\n\n"
+						+ "Once the upload is complete, you will be able to see an editable visual "
+						+ "transcript of what was said in the audio file as well has be given the option to listen to the audio.\n\n"
+						+ "Both the auido and text file will be sorted into files and saved to the "
+						+ "program so that you may access it later if you wish."
+				);
+				
+		
 		//Create a button for the help page
 		JButton help = new JButton("HELP");
 		help.setPreferredSize(new Dimension(100,30));
@@ -272,7 +289,22 @@ public class ProfileGUI extends JPanel {
 		help.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//Create Help page here!!!!!!!!!!!!!!!
+				//Create another JPanel with a GridBagLayout and constraints for the Help page
+				JFrame helpFrame = new JFrame();
+				helpFrame.setLayout(new FlowLayout());
+				helpFrame.setSize(500, 500);
+				helpFrame.getContentPane().setLayout(new BorderLayout());
+				
+				JPanel helpPanel = new JPanel();
+				helpPanel.setBackground(Color.white);
+				HelpText.setBorder(BorderFactory.createMatteBorder(25, 25, 25, 25, Color.WHITE));
+				helpFrame.add(helpPanel,BorderLayout.PAGE_START);
+				HelpText.setEditable(false);
+				HelpText.setLineWrap(true);
+				HelpText.setWrapStyleWord(true);
+				helpFrame.add(HelpText);
+				helpFrame.setLocationRelativeTo(null);
+				helpFrame.setVisible(true);
 			}
 		});
 				
