@@ -489,8 +489,5 @@ public class Database {
 	public void setSortSelection(String selection) {
 		sort = selection;
 	}
-
-
 }
-
 
