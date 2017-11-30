@@ -21,7 +21,7 @@ import marytts.util.data.audio.StereoAudioInputStream;
 
 
 /**
- * A single Thread Audio Player Once used it has to be initialised again
+ * A single Thread Audio Player Once used it has to be initialized again
  * 
  * @author GOXR3PLUS
  *
@@ -261,8 +261,6 @@ public class AudioPlayer extends Thread {
 	@Override
 
 	public void run() {
-
-		
 
 		status = Status.PLAYING;
 		AudioFormat audioFormat = ais.getFormat();
