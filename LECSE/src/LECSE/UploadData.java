@@ -179,13 +179,13 @@ public class UploadData{
 		JButton chooser = new JButton("Choose File");
 		chooser.setPreferredSize(new Dimension(100,30));
 		chooser.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-//		chooser.addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				String filepath = converter.getAudioFile();
-//				System.out.println(filepath);
-//			}
-//		});
+		chooser.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String filepath = converter.getAudioFile();
+				System.out.println(filepath);
+			}
+		});
 		// add file browsing
 		JButton upload = new JButton("Okay");
 		upload.setPreferredSize(new Dimension(65,30));
