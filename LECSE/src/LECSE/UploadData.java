@@ -7,6 +7,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,14 +26,14 @@ public class UploadData{
 	//public static void main(String[] args) throws FileNotFoundException, IOException{
 	//Load the database
 
-	public UploadData(JFrame frame) throws FileNotFoundException, IOException {
+	public UploadData(JFrame mainFrame) throws FileNotFoundException, IOException {
 
 		Database db = new Database();		
 		db.loadUserInfo();
 		db.loadCourseInstructor();
 		db.loadLectures();
 		
-		JFrame Frame = new JFrame();
+		JFrame frame = new JFrame();
 
 		JButton chooser = new JButton("Choose File");
 		chooser.setPreferredSize(new Dimension(100,30));
@@ -48,11 +49,11 @@ public class UploadData{
 				try {
 					//Add the users input to the database
 	
-					MediaGUI mg = new MediaGUI(frame);
-					frame.getContentPane().removeAll();
-					frame.getContentPane().add(mg);
-					frame.revalidate();
-					Frame.setVisible(false);
+					MediaGUI mg = new MediaGUI(mainFrame);
+					mainFrame.getContentPane().removeAll();
+					mainFrame.getContentPane().add(mg);
+					mainFrame.revalidate();
+					frame.setVisible(false);
 
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
@@ -117,10 +118,9 @@ public class UploadData{
 
 		//Create a new JPanel with a GridBagLayout and constraints
 		JPanel panel = new JPanel(new GridBagLayout());
-		panel.setPreferredSize(new Dimension(700,700));
+		panel.setPreferredSize(new Dimension(450, 400));
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.anchor = GridBagConstraints.NORTHWEST;
-		gbc.insets = new Insets(0, 10, 0, 0);
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.weighty = 0;
@@ -132,71 +132,77 @@ public class UploadData{
 		gbc.gridy = 0;
 		gbc.gridx = 0;
 		gbc.anchor = GridBagConstraints.EAST;
-		gbc.insets = new Insets(0, 10, 0, 0);
+		gbc.insets = new Insets(0, 30, 0, 0);
 		panel.add(lectureTitle, gbc);
 		//Add text field
 		gbc.gridy = 0;
 		gbc.gridx = 1;
 		gbc.anchor = GridBagConstraints.WEST;
-		//gbc.gridwidth = 2;
+		gbc.insets = new Insets(0, 10, 0, 0);
 		panel.add(Lecture, gbc);
 
 		//Add the instructor name text field 
 		gbc.gridy = 1;
 		gbc.gridx = 0;
 		gbc.anchor = GridBagConstraints.EAST;
-		gbc.insets = new Insets(0, 10, 0, 0);
+		gbc.insets = new Insets(0, 30, 0, 0);
 		panel.add(instructorName, gbc);
 		//Add the text field
 		gbc.gridy = 1;
 		gbc.gridx = 1;
 		gbc.anchor = GridBagConstraints.WEST;
+		gbc.insets = new Insets(0, 10, 0, 0);
 		panel.add(Instructor, gbc);
 
 		//Add the course name text field 
 		gbc.gridy = 2;
 		gbc.gridx = 0;
 		gbc.anchor = GridBagConstraints.EAST;
-		gbc.insets = new Insets(0, 10, 0, 0);
+		gbc.insets = new Insets(0, 30, 0, 0);
 		panel.add(courseName, gbc);
 		//Add the text field
 		gbc.gridy = 2;
 		gbc.gridx = 1;
 		gbc.anchor = GridBagConstraints.WEST;
+		gbc.insets = new Insets(0, 10, 0, 0);
 		panel.add(Course, gbc);
 
 		//Add the date text field 
 		gbc.gridy = 3;
 		gbc.gridx = 0;
 		gbc.anchor = GridBagConstraints.EAST;
-		gbc.insets = new Insets(0, 10, 0, 0);
+		gbc.insets = new Insets(0, 30, 0, 0);
 		panel.add(date, gbc);
 		//Add the text field
 		gbc.gridy = 3;
 		gbc.gridx = 1;
 		gbc.anchor = GridBagConstraints.WEST;
+		gbc.insets = new Insets(0, 10, 0, 0);
 		panel.add(Date, gbc);
 
 		//Add the file browsing button
+		gbc.insets = new Insets(0, 65, 0, 0);
 		gbc.gridy = 4;
 		gbc.gridx = 0;
 		panel.add(chooser, gbc);
 
 		//Add the okay button
-		gbc.gridy = 5;
+		gbc.gridy = 4;
 		gbc.gridx = 2;
+		gbc.weighty = 1;
+		gbc.weightx = 1;
 		panel.add(upload, gbc);
 
 		//JFrame Frame = new JFrame();
-		Frame.setSize(700, 700);
-		Frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Frame.setLayout(new FlowLayout()); 
-		Frame.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-		Frame.add(panel);
-		Frame.getContentPane().setBackground(Color.white);
-		Frame.setResizable(true);
-		Frame.setLocationRelativeTo(null);
-		Frame.setVisible(true);
+		frame.setSize(450, 400);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLayout(new FlowLayout()); 
+		frame.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		frame.add(panel);
+		frame.getContentPane().setBackground(Color.white);
+		frame.setResizable(true);
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
 
 	} // end of main method
 } // end of class
