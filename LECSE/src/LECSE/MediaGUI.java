@@ -56,6 +56,8 @@ public class MediaGUI extends JPanel
 {
 	public JTextField textField;
 	public JTextArea textArea;
+	String audioPath;
+	String textPath;
 
 	static MyHighlightPainter myHighlightPainter = new MyHighlightPainter(Color.yellow);
 
@@ -73,10 +75,10 @@ public class MediaGUI extends JPanel
 		String path = System.getProperty("user.home") + File.separator + "Documents" + File.separator + "LECSE";
 		File customDir = new File(path);
 		customDir.mkdir();
-		String audioPath = path + File.separator + "Audio Files";
+		audioPath = path + File.separator + "Audio Files";
 		File audioFolder = new File(audioPath);
 		audioFolder.mkdir();
-		String textPath = path + File.separator + "Text Files";
+		textPath = path + File.separator + "Text Files";
 		File textFolder = new File(textPath);
 		textFolder.mkdir();
 
@@ -485,5 +487,13 @@ public class MediaGUI extends JPanel
 		}
 
 		return in;
+	}
+	
+	public String getAudioPath() {
+		return audioPath;
+	}
+	
+	public String getTextPath() {
+		return textPath;
 	}
 }
