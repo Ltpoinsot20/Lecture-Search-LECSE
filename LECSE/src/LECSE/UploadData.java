@@ -35,6 +35,8 @@ public class UploadData{
 		db.loadCourseInstructor();
 		db.loadLectures();
 		
+		AudioConverter converter = new AudioConverter();
+		
 		JFrame frame = new JFrame();
 
 		// Create a text field for lecture title
@@ -177,7 +179,13 @@ public class UploadData{
 		JButton chooser = new JButton("Choose File");
 		chooser.setPreferredSize(new Dimension(100,30));
 		chooser.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		//upload.addActionListener(new ActionListener() {}
+//		chooser.addActionListener(new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				String filepath = converter.getAudioFile();
+//				System.out.println(filepath);
+//			}
+//		});
 		// add file browsing
 		JButton upload = new JButton("Okay");
 		upload.setPreferredSize(new Dimension(65,30));
