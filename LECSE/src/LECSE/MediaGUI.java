@@ -30,6 +30,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import javax.swing.event.TreeExpansionEvent;
 import javax.swing.event.TreeExpansionListener;
 import javax.swing.event.TreeSelectionEvent;
@@ -309,7 +310,11 @@ public class MediaGUI extends JPanel
 					fw = new FileWriter(fileName);
 					bw = new BufferedWriter(fw);
 					bw.write(content);
+					UIManager.put("OptionPane.background", Color.white);
+					UIManager.put("Panel.background", Color.white);
 					JOptionPane.showMessageDialog(frame, "Text has been saved!");
+
+					//JOptionPane.showMessageDialog(null,"Text has been saved!","SetColor",JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 
@@ -340,27 +345,27 @@ public class MediaGUI extends JPanel
 		c.gridx = 1;
 		c.gridy = 4;
 		add(saveButton,c);
-		
-		
-		// Upload Button
-				JButton uploadButton = new JButton("Upload");
-				uploadButton.addActionListener(e->
-				{
-					try {
-						UploadData ud = new UploadData(frame);
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					//frame.getContentPane().removeAll();
-					//frame.getContentPane().add(ud);
-					//frame.revalidate();
 
-				});
-				c.gridx = 2;
-				c.gridy = 4;
-				c.insets = new Insets(10,0,0,200);
-				add(uploadButton,c);
+
+		// Upload Button
+		JButton uploadButton = new JButton("Upload");
+		uploadButton.addActionListener(e->
+		{
+			try {
+				UploadData ud = new UploadData(frame);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			//frame.getContentPane().removeAll();
+			//frame.getContentPane().add(ud);
+			//frame.revalidate();
+
+		});
+		c.gridx = 2;
+		c.gridy = 4;
+		c.insets = new Insets(10,0,0,200);
+		add(uploadButton,c);
 	}
 
 	/**

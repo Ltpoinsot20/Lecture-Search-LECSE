@@ -17,8 +17,10 @@ import java.io.IOException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 
 import groovy.ui.SystemOutputInterceptor;
 
@@ -34,7 +36,7 @@ public class UploadData{
 		db.loadUserInfo();
 		db.loadCourseInstructor();
 		db.loadLectures();
-		
+
 		JFrame frame = new JFrame();
 
 		// Create a text field for lecture title
@@ -156,14 +158,14 @@ public class UploadData{
 		gbc.anchor = GridBagConstraints.EAST;
 		gbc.insets = new Insets(0, 30, 0, 0);
 		panel.add(date, gbc);
-		
+
 		JLabel empty = new JLabel();
 		gbc.gridy = 4;
 		gbc.weighty = 1;
 		gbc.weightx = 1;
 		panel.add(empty, gbc);
-		
-		
+
+
 		//Add the text field
 		//gbc.gridy = 3;
 		//gbc.gridx = 1;
@@ -172,7 +174,7 @@ public class UploadData{
 		gbc.anchor = GridBagConstraints.NORTHWEST;
 		gbc.insets = new Insets(0, 10, 0, 0);
 		panel2.add(Date, gbc);
-		
+
 		//Create a button
 		JButton chooser = new JButton("Choose File");
 		chooser.setPreferredSize(new Dimension(100,30));
@@ -201,7 +203,7 @@ public class UploadData{
 						if(exist == false) {
 							db.addCourse_Instructor(course_name, instructor_name);
 						}
-						
+
 						//Create a new lecture object
 						Lecture lecture = new Lecture();
 						lecture.setCourseName(course_name);
@@ -209,16 +211,18 @@ public class UploadData{
 						lecture.setFileName(Lecture.getText() + ".txt");
 						lecture.setDate(Date.getText());
 						db.addLecture(lecture);
-		
+
 						MediaGUI mg = new MediaGUI(mainFrame);
 						mainFrame.getContentPane().removeAll();
 						mainFrame.getContentPane().add(mg);
 						mainFrame.revalidate();
 						frame.setVisible(false);
 					}else {
-						System.out.println("works!");
+						UIManager.put("OptionPane.background", Color.white);
+						UIManager.put("Panel.background", Color.white);
+						JOptionPane.showMessageDialog(frame, "All text fields must be filled out.");
 					}
-					
+
 
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
