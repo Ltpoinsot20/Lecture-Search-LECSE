@@ -26,6 +26,10 @@ import groovy.ui.SystemOutputInterceptor;
 
 //import LECSE.MediaGUI;
 
+/**
+ * @author Alex, Sigrid, Jordan
+ *
+ */
 public class UploadData{
 	//public static void main(String[] args) throws FileNotFoundException, IOException{
 	//Load the database
