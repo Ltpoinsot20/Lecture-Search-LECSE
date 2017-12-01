@@ -342,11 +342,19 @@ public class MediaGUI extends JPanel
 		add(saveButton,c);
 		
 		
-		// Save Button
+		// Upload Button
 				JButton uploadButton = new JButton("Upload");
 				uploadButton.addActionListener(e->
 				{
-					System.out.println("pressed");
+					try {
+						UploadData ud = new UploadData(frame);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					//frame.getContentPane().removeAll();
+					//frame.getContentPane().add(ud);
+					//frame.revalidate();
 
 				});
 				c.gridx = 2;

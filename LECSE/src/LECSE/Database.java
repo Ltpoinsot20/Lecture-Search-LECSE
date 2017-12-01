@@ -186,6 +186,9 @@ public class Database {
 		writer.close();
 		lectureFile.delete();
 		tempFile.renameTo(lectureFile);
+		
+		//Delete the text file
+		
 
 
 	}
