@@ -38,8 +38,7 @@ public class AudioConverter
 	    
 	    if(returnVal == JFileChooser.APPROVE_OPTION) 
 	    {
-	    	System.out.println(chooser.getSelectedFile().getName());
-	    	return chooser.getSelectedFile().getName();
+	    	return chooser.getSelectedFile().getAbsolutePath();
 	    }
 	    else
 	    {
