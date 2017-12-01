@@ -47,6 +47,8 @@ import javax.swing.text.JTextComponent;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
 
+import org.apache.commons.lang.SystemUtils;
+
 
 /**
  * @author Sigrid, Alex, Jordan
@@ -72,7 +74,6 @@ public class MediaGUI extends JPanel
 
 		String path = System.getProperty("user.home") + File.separator + "Documents" + File.separator + "LECSE";
 		File customDir = new File(path);
-		customDir.mkdir();
 		String audioPath = path + File.separator + "Audio Files";
 		File audioFolder = new File(audioPath);
 		audioFolder.mkdir();

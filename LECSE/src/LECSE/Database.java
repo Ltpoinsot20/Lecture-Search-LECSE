@@ -377,8 +377,6 @@ public class Database {
 		}
 		br.close();
 	}
-
-
 	
 	/**
 	 * @param cn the name of a course

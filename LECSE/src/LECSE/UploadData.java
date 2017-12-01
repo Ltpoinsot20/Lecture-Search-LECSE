@@ -11,6 +11,7 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -187,7 +188,9 @@ public class UploadData{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String filepath = converter.getAudioFile();
-				System.out.println(filepath);
+				File tempfile = new File(filepath);
+				//if(tempfile.renameTo(new File()))
+				
 			}
 		});
 		// add file browsing
