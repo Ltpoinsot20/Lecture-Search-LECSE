@@ -18,13 +18,10 @@ import java.io.IOException;
 public class text_writer{
 
 	private String filename;
-	private File soundFile;
 	private String filepath;
-	private wav_recognizer wavREC = new wav_recognizer(soundFile);
 
-	public text_writer(String filename, File soundFile, String file_path){
+	public text_writer(String filename, String file_path){
 		setfilename(filename);
-		setsoundFile(soundFile);
 		setfilepath(file_path);
 	}
 	
@@ -34,6 +31,8 @@ public class text_writer{
 	 */
 	
 	public String get_recognized_text() {
+		File soundFile = new File(filename);
+		wav_recognizer wavREC = new wav_recognizer(soundFile);
 		wavREC.startRecognition();
 		//String [] confidence = wavREC.getConfidence();
 		String content = wavREC.getOutput();
@@ -78,13 +77,6 @@ public class text_writer{
 	 */
 	public void setfilename(String filename){
 		this.filename = filename;
-	}
-	
-	/**
-	 * @param soundFile
-	 */
-	public void setsoundFile(File soundFile){
-		this.soundFile = soundFile;
 	}
 	
 	/**
