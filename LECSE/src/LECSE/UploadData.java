@@ -20,6 +20,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import groovy.ui.SystemOutputInterceptor;
+
 //import LECSE.MediaGUI;
 
 public class UploadData{
@@ -184,9 +186,9 @@ public class UploadData{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					//Add the users input to the database
+					//Add the course and instructor to array in database + file if it doen't exist already
 					Boolean exist = false;
-					String course_name = courseName.getText();
+					String course_name = Course.getText();
 					String instructor_name = Instructor.getText();
 					String [][] ci = db.getCourseAndINstructor();
 					for(int i = 0; i < ci.length; i++) {
@@ -194,10 +196,18 @@ public class UploadData{
 							exist = true;
 						}
 					}
-					
-					if(exist = false) {
+
+					if(exist == false) {
 						db.addCourse_Instructor(course_name, instructor_name);
 					}
+					
+					//Create a new lecture object
+					Lecture lecture = new Lecture();
+					lecture.setCourseName(course_name);
+					lecture.setInstructorName(instructor_name);
+					lecture.setFileName(Lecture.getText() + ".txt");
+					lecture.setDate(Date.getText());
+					db.addLecture(lecture);
 	
 					MediaGUI mg = new MediaGUI(mainFrame);
 					mainFrame.getContentPane().removeAll();
