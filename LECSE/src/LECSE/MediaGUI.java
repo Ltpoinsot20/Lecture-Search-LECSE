@@ -69,6 +69,16 @@ public class MediaGUI extends JPanel
 		db.loadCourseInstructor();
 		db.loadLectures();
 
+		String path = System.getProperty("user.home") + File.separator + "Documents" + File.separator + "LECSE";
+		File customDir = new File(path);
+		customDir.mkdir();
+		String audioPath = path + File.separator + "Audio Files";
+		File audioFolder = new File(audioPath);
+		audioFolder.mkdir();
+		String textPath = path + File.separator + "Text Files";
+		File textFolder = new File(textPath);
+		textFolder.mkdir();
+
 		setLayout(new GridBagLayout());
 		setBackground(Color.white);
 		GridBagConstraints c = new GridBagConstraints();
@@ -116,7 +126,7 @@ public class MediaGUI extends JPanel
 		tree.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		tree.getSelectionModel().setSelectionMode
 		(TreeSelectionModel.SINGLE_TREE_SELECTION);
-		
+
 		//Create the nodes
 		String[][] ci = db.getCourseAndINstructor();
 
@@ -159,12 +169,17 @@ public class MediaGUI extends JPanel
 
 
 				if (node.isLeaf()) {
-					try {
-						//Setting the text area to display the file!!
-						textarea.setText(readText(node.getUserObject().toString()));
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+					String fileName = node.getUserObject().toString();
+					if(fileName.endsWith(".txt")) {
+						try {
+							//Setting the text area to display the file!!
+							textarea.setText(readText(node.getUserObject().toString(), textPath));
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}else if(fileName.endsWith(".wav")) {
+						//Open the audio file in audio player here!
 					}
 				} 
 			}
@@ -277,8 +292,8 @@ public class MediaGUI extends JPanel
 		add(scroll, c);
 
 		// Save Button
-		JButton button = new JButton("Save");
-		button.addActionListener(e->
+		JButton saveButton = new JButton("Save");
+		saveButton.addActionListener(e->
 		{
 			String words = textarea.getText();
 			BufferedWriter bw = null;
@@ -324,16 +339,29 @@ public class MediaGUI extends JPanel
 		});
 		c.gridx = 1;
 		c.gridy = 4;
-		add(button,c);
+		add(saveButton,c);
+		
+		
+		// Save Button
+				JButton uploadButton = new JButton("Upload");
+				uploadButton.addActionListener(e->
+				{
+					System.out.println("pressed");
+
+				});
+				c.gridx = 2;
+				c.gridy = 4;
+				c.insets = new Insets(10,0,0,200);
+				add(uploadButton,c);
 	}
-	
+
 	/**
 	 * Reads the text from a text file and returns the words as a string
 	 * @param fileName The name of the file to be read from
 	 * @return Returns the words from the file as a string
 	 * @throws IOException
 	 */
-	public static String readText(String fileName) throws IOException
+	public static String readText(String fileName, String path) throws IOException
 	{
 		// This will reference one line at a time
 		String line = null;
@@ -343,7 +371,7 @@ public class MediaGUI extends JPanel
 		try {
 			// FileReader reads text files in the default encoding.
 			FileReader fileReader = 
-					new FileReader(fileName);
+					new FileReader(path + File.separator + fileName);
 
 			// Always wrap FileReader in BufferedReader.
 			BufferedReader bufferedReader = 
