@@ -9,11 +9,10 @@ import com.darkprograms.speech.recognizer.GoogleResponse;
 import com.darkprograms.speech.recognizer.Recognizer;
 
 /**
- * This is the main class for LECSE's speech recognizer.
- * 
- * @param 
  * @author Lucas Tijerina
- *
+ * This is the main class for LECSE's speech recognizer. It splits up an input
+ * .wav file into 10 second intervals and sent independently to Google's speech
+ * recognizer software. Requires Internet connection. 
  */
 
 public class wav_recognizer{
@@ -24,10 +23,20 @@ public class wav_recognizer{
 	private String[] pos_rep = new String[500];
 	private String[] confidence = new String[500];
 
+	/**
+	 * @param soundFile
+	 * Creating a wav_recognizer object sets the audiofile to be translated to text
+	 */
+	
 	public wav_recognizer(File soundFile) {
 		setAudioFile(soundFile);
 		System.out.println("Reading file: " + soundFile);
 	}
+	
+	/**
+	 * This method initiates the file recognition by splitting up the .wav file
+	 * and processing each piece independently.
+	 */
 	
 	public void startRecognition() {
 		String output = "";
@@ -91,6 +100,11 @@ public class wav_recognizer{
 		}
 	}
 	
+	/**
+	 * @param confidence
+	 * @param counter
+	 */
+	
 	public void setConfidence(String confidence, int counter) {
 		
 		if (confidence == null) {
@@ -99,26 +113,46 @@ public class wav_recognizer{
 		this.confidence[counter] = confidence;
 	}
 	
+	/**
+	 * @param output
+	 */
+	
 	public void setFinal_output(String output) {
 		this.final_output = final_output + output;
 	}
 	
+	/**
+	 * @param soundFile
+	 */
 	public void setAudioFile(File soundFile) {
 		this.soundFile = soundFile;
 	}
+	
+	/**
+	 * @return soundFile
+	 */
 	
 	public File getAudioFile() {
 		return soundFile;
 	}
 
+	/**
+	 * @return confidence
+	 */
 	public String[] getConfidence() {
 		return confidence;
 	}
 	
+	/**
+	 * @return pos_rep
+	 */
 	public String[] getPossibleResponses(){
 		return pos_rep;
 	}
 	
+	/**
+	 * @return final_output
+	 */
 	public String getOutput() {
 		return final_output;
 	}
