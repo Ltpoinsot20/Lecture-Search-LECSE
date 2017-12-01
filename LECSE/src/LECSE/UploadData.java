@@ -21,10 +21,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
-//import LECSE.MediaGUI;
-
 /**
- * @author Alex, Sigrid, Jordan
+ * @author Alex, Sigrid, Jordan, Lucas
  *
  */
 public class UploadData{
@@ -48,7 +46,6 @@ public class UploadData{
 		lectureTitle.setFont(new Font("Segoe UI", Font.PLAIN, 22));
 		Lecture.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		lectureTitle.setBackground(Color.WHITE);
-		//lectureTitle.setBorder(null);
 
 
 		// Create a text field for instructor name
@@ -59,8 +56,6 @@ public class UploadData{
 		instructorName.setPreferredSize(new Dimension(460,45));
 		instructorName.setFont(new Font("Segoe UI", Font.PLAIN, 22));
 		Instructor.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-		instructorName.setBackground(Color.WHITE);
-		//instructorName.setBorder(null);
 
 		// Create a text field for course name
 		JLabel courseName = new JLabel("Course: ");
@@ -71,8 +66,7 @@ public class UploadData{
 		courseName.setFont(new Font("Segoe UI", Font.PLAIN, 22));
 		Course.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		courseName.setBackground(Color.WHITE);
-		//courseName.setBorder(null);
-
+		
 		// Create a text field for date
 		JLabel date = new JLabel("Date: ");
 		JTextField Date = new JTextField();
@@ -82,7 +76,6 @@ public class UploadData{
 		date.setFont(new Font("Segoe UI", Font.PLAIN, 22));
 		Date.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		date.setBackground(Color.WHITE);
-		//date.setBorder(null);
 
 		// set the font for header and titles
 		lectureTitle.setFont(new Font("Segoe UI", Font.PLAIN, 30));
@@ -95,11 +88,9 @@ public class UploadData{
 		JPanel panel2 = new JPanel(new GridBagLayout());
 		panel.setBackground(Color.white);
 		panel2.setBackground(Color.white);
-		//panel.setPreferredSize(new Dimension(450, 400));
 		panel.setPreferredSize(new Dimension(225, 200));
 		panel2.setPreferredSize(new Dimension(225, 200));
 		GridBagConstraints gbc = new GridBagConstraints();
-		//gbc.anchor = GridBagConstraints.NORTHWEST;
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.weighty = 0;
@@ -113,9 +104,6 @@ public class UploadData{
 		gbc.anchor = GridBagConstraints.EAST;
 		gbc.insets = new Insets(0, 30, 0, 0);
 		panel.add(lectureTitle, gbc);
-		//Add text field
-		//gbc.gridy = 0;
-		//gbc.gridx = 1;
 		gbc.anchor = GridBagConstraints.NORTHWEST;
 		gbc.insets = new Insets(0, 10, 0, 0);
 		panel2.add(Lecture, gbc);
@@ -126,9 +114,6 @@ public class UploadData{
 		gbc.anchor = GridBagConstraints.EAST;
 		gbc.insets = new Insets(0, 30, 0, 0);
 		panel.add(instructorName, gbc);
-		//Add the text field
-		//gbc.gridy = 1;
-		//gbc.gridx = 1;
 		gbc.anchor = GridBagConstraints.NORTHWEST;
 		gbc.insets = new Insets(0, 10, 0, 0);
 		panel2.add(Instructor, gbc);
@@ -139,9 +124,6 @@ public class UploadData{
 		gbc.anchor = GridBagConstraints.EAST;
 		gbc.insets = new Insets(0, 30, 0, 0);
 		panel.add(courseName, gbc);
-		//Add the text field
-		//gbc.gridy = 2;
-		//gbc.gridx = 1;
 		gbc.anchor = GridBagConstraints.NORTHWEST;
 		gbc.insets = new Insets(0, 10, 0, 0);
 		panel2.add(Course, gbc);
@@ -149,8 +131,6 @@ public class UploadData{
 		//Add the date text field 
 		gbc.gridy = 3;
 		gbc.gridx = 0;
-		//gbc.weighty = 1;
-		//gbc.weightx = 1;
 		gbc.anchor = GridBagConstraints.EAST;
 		gbc.insets = new Insets(0, 30, 0, 0);
 		panel.add(date, gbc);
@@ -163,8 +143,6 @@ public class UploadData{
 
 
 		//Add the text field
-		//gbc.gridy = 3;
-		//gbc.gridx = 1;
 		gbc.weighty = 0;
 		gbc.weightx = 0;
 		gbc.anchor = GridBagConstraints.NORTHWEST;
@@ -234,8 +212,6 @@ public class UploadData{
 
 		//Add the file browsing button
 		gbc.insets = new Insets(70, 10, 0, 0);
-		//gbc.weighty = 0;
-		//gbc.weightx = 0;
 		gbc.gridy = 4;
 		gbc.gridx = 0;
 		panel2.add(chooser, gbc);
@@ -243,7 +219,6 @@ public class UploadData{
 		//Add the okay button
 		gbc.insets = new Insets(40, 85, 0, 0);
 		gbc.gridy = 5;
-		//gbc.gridx = 2;
 		gbc.weighty = 1;
 		gbc.weightx = 1;
 		panel2.add(upload, gbc);
