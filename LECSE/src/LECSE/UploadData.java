@@ -186,34 +186,39 @@ public class UploadData{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					//Add the course and instructor to array in database + file if it doen't exist already
-					Boolean exist = false;
-					String course_name = Course.getText();
-					String instructor_name = Instructor.getText();
-					String [][] ci = db.getCourseAndINstructor();
-					for(int i = 0; i < ci.length; i++) {
-						if(course_name.equals(ci[i][0]) && instructor_name.equals(ci[i][1])) {
-							exist = true;
+					if(Lecture.getText().length() != 0 && Course.getText().length() != 0 && Instructor.getText().length() != 0 && Date.getText().length() != 0) {
+						//Add the course and instructor to array in database + file if it doen't exist already
+						Boolean exist = false;
+						String course_name = Course.getText();
+						String instructor_name = Instructor.getText();
+						String [][] ci = db.getCourseAndINstructor();
+						for(int i = 0; i < ci.length; i++) {
+							if(course_name.equals(ci[i][0]) && instructor_name.equals(ci[i][1])) {
+								exist = true;
+							}
 						}
-					}
 
-					if(exist == false) {
-						db.addCourse_Instructor(course_name, instructor_name);
+						if(exist == false) {
+							db.addCourse_Instructor(course_name, instructor_name);
+						}
+						
+						//Create a new lecture object
+						Lecture lecture = new Lecture();
+						lecture.setCourseName(course_name);
+						lecture.setInstructorName(instructor_name);
+						lecture.setFileName(Lecture.getText() + ".txt");
+						lecture.setDate(Date.getText());
+						db.addLecture(lecture);
+		
+						MediaGUI mg = new MediaGUI(mainFrame);
+						mainFrame.getContentPane().removeAll();
+						mainFrame.getContentPane().add(mg);
+						mainFrame.revalidate();
+						frame.setVisible(false);
+					}else {
+						System.out.println("works!");
 					}
 					
-					//Create a new lecture object
-					Lecture lecture = new Lecture();
-					lecture.setCourseName(course_name);
-					lecture.setInstructorName(instructor_name);
-					lecture.setFileName(Lecture.getText() + ".txt");
-					lecture.setDate(Date.getText());
-					db.addLecture(lecture);
-	
-					MediaGUI mg = new MediaGUI(mainFrame);
-					mainFrame.getContentPane().removeAll();
-					mainFrame.getContentPane().add(mg);
-					mainFrame.revalidate();
-					frame.setVisible(false);
 
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
