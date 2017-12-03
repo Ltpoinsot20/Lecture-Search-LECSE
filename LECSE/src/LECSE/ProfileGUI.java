@@ -279,6 +279,8 @@ public class ProfileGUI extends JPanel {
 						+ "transcript of what was said in the audio file as well has be given the option to listen to the audio.\n\n"
 						+ "Both the auido and text file will be sorted into files and saved to the "
 						+ "program so that you may access it later if you wish."
+						+ "To access the saved text files and audio files, go to 'This computer', followed by"
+						+ "'Documents', then 'LECSE'."
 				);
 				
 		
