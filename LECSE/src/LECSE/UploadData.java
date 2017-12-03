@@ -154,13 +154,20 @@ public class UploadData{
 		JButton chooser = new JButton("Choose File");
 		chooser.setPreferredSize(new Dimension(100,30));
 		chooser.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+		String path = System.getProperty("user.home") + File.separator + "Documents" + File.separator + "LECSE"+ File.separator + "Audio Files";
+		System.out.println(path);
 		chooser.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String filepath = converter.getAudioFile();
 				File tempfile = new File(filepath);
-				//if(tempfile.renameTo(new File()))
 				
+				if(tempfile.renameTo(new File(path +  File.separator + tempfile.getName()))) {
+				System.out.println("The file was moved succesfully!");
+				}
+				else {
+					System.out.println("Sorry! Something went wrong.");
+				}
 			}
 		});
 		// add file browsing
