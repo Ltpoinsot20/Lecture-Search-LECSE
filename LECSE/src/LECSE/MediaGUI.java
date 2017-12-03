@@ -54,9 +54,11 @@ import javax.swing.tree.TreeSelectionModel;
  */
 public class MediaGUI extends JPanel
 {
+	////66666
 	public JTextField textField;
 	public JTextArea textArea;
 	String audioPath;
+	String audioName;
 	String textPath;
 
 	static MyHighlightPainter myHighlightPainter = new MyHighlightPainter(Color.yellow);
@@ -74,6 +76,7 @@ public class MediaGUI extends JPanel
 
 		String path = System.getProperty("user.home") + File.separator + "Documents" + File.separator + "LECSE";
 		File customDir = new File(path);
+		customDir.mkdir();
 		audioPath = path + File.separator + "Audio Files";
 		File audioFolder = new File(audioPath);
 		audioFolder.mkdir();
@@ -171,18 +174,27 @@ public class MediaGUI extends JPanel
 
 
 				if (node.isLeaf()) {
-					String fileName = node.getUserObject().toString();
-					if(fileName.endsWith(".txt")) {
-						try {
-							//Setting the text area to display the file!!
-							textarea.setText(readText(node.getUserObject().toString(), textPath));
-						} catch (IOException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
+					String fileName = node.getUserObject().toString() + ".txt";
+					
+					ArrayList<Lecture> lec = db.getLectures();
+					for(int i = 0; i < lec.size(); i++) {
+						if(fileName.equals(lec.get(i).getFileName())) {
+							audioName = lec.get(i).getAudioName();
 						}
-					}else if(fileName.endsWith(".wav")) {
-						//Open the audio file in audio player here!
 					}
+
+					//Setting the text area to display the file!!
+					try {
+						textarea.setText(readText(fileName, textPath));
+						
+						//Load audio file to audio player
+						String fullAudioName = audioPath + audioName;
+						
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+
 				} 
 			}
 		});
@@ -487,11 +499,11 @@ public class MediaGUI extends JPanel
 
 		return in;
 	}
-	
+
 	public String getAudioPath() {
 		return audioPath;
 	}
-	
+
 	public String getTextPath() {
 		return textPath;
 	}

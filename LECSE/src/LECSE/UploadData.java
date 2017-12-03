@@ -27,6 +27,8 @@ import javax.swing.UIManager;
  *
  */
 public class UploadData{
+	private File tempfile;
+	
 	public UploadData(JFrame mainFrame) throws FileNotFoundException, IOException {
 
 		Database db = new Database();		
@@ -155,12 +157,11 @@ public class UploadData{
 		chooser.setPreferredSize(new Dimension(100,30));
 		chooser.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		String path = System.getProperty("user.home") + File.separator + "Documents" + File.separator + "LECSE"+ File.separator + "Audio Files";
-		System.out.println(path);
 		chooser.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String filepath = converter.getAudioFile();
-				File tempfile = new File(filepath);
+				tempfile = new File(filepath);
 				
 				if(tempfile.renameTo(new File(path +  File.separator + tempfile.getName()))) {
 				System.out.println("The file was moved succesfully!");
@@ -198,8 +199,9 @@ public class UploadData{
 						Lecture lecture = new Lecture();
 						lecture.setCourseName(course_name);
 						lecture.setInstructorName(instructor_name);
-						lecture.setFileName(Lecture.getText() + ".txt");
+						lecture.setFileName(Lecture.getText());
 						lecture.setDate(Date.getText());
+						lecture.setAudioName(tempfile.getName());
 						db.addLecture(lecture);
 
 						MediaGUI mg = new MediaGUI(mainFrame);
@@ -245,5 +247,6 @@ public class UploadData{
 		frame.setVisible(true);
 
 	} // end of main method
+	
 } // end of class
 
