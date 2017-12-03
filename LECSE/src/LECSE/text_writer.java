@@ -19,19 +19,21 @@ public class text_writer{
 
 	private String filename;
 	private String filepath;
+	private String textfile_name;
 
-	public text_writer(String filename, String file_path){
+	public text_writer(String filename, String file_path, String textfile_name){
 		setfilename(filename);
 		setfilepath(file_path);
+		setfiletextname(textfile_name);
 	}
-	
+
 	/**
 	 * @return content
 	 * This method returns the output text from the speech to text recognition.
 	 */
 	
 	public String get_recognized_text() {
-		File soundFile = new File(filename);
+		File soundFile = new File(filepath + File.separator + filename);
 		wav_recognizer wavREC = new wav_recognizer(soundFile);
 		wavREC.startRecognition();
 		//String [] confidence = wavREC.getConfidence();
@@ -49,7 +51,7 @@ public class text_writer{
 	public void file_writer(String content) {
 		BufferedWriter bw = null;
 		FileWriter fw = null;
-		filename = filepath + File.separator + filename;
+		filename = System.getProperty("user.home") + File.separator + "Documents" + File.separator + "LECSE"+ File.separator + "Text Files" + File.separator + textfile_name + ".txt";
 		
 
 		try {
@@ -84,5 +86,12 @@ public class text_writer{
 	 */
 	public void setfilepath(String filepath){
 		this.filepath = filepath;
+	}
+	
+	/**
+	 * @param textfile_name
+	 */
+	public void setfiletextname(String textfile_name){
+		this.textfile_name = textfile_name;
 	}
 }

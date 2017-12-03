@@ -169,6 +169,9 @@ public class UploadData{
 				else {
 					System.out.println("Sorry! Something went wrong.");
 				}
+				text_writer writer = new text_writer(tempfile.getName(), path, Lecture.getText());
+				String output_text = writer.get_recognized_text();
+				writer.file_writer(output_text);
 			}
 		});
 		// add file browsing
