@@ -3,7 +3,6 @@ package LECSE;
 import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -30,9 +29,6 @@ import javax.swing.UIManager;
  *
  */
 public class UploadData{
-	//public static void main(String[] args) throws FileNotFoundException, IOException{
-	//Load the database
-
 	public UploadData(JFrame mainFrame) throws FileNotFoundException, IOException {
 
 		Database db = new Database();		
@@ -49,9 +45,6 @@ public class UploadData{
 		JTextField Lecture = new JTextField();
 		Lecture.setPreferredSize(new Dimension(150,45));
 		Lecture.setEditable(true);
-		//	Lecture.setBorder(null);
-		//Lecture.setMinimumSize(new Dimension(150, 45));
-		String lecture_title = Lecture.getText();
 		lectureTitle.setPreferredSize(new Dimension(150,45));
 		lectureTitle.setFont(new Font("Segoe UI", Font.PLAIN, 22));
 		Lecture.setFont(new Font("Segoe UI", Font.PLAIN, 20));
@@ -86,7 +79,6 @@ public class UploadData{
 		JTextField Date = new JTextField();
 		Date.setPreferredSize(new Dimension(150,45));
 		Date.setEditable(true);
-		String date_field = date.getText();
 		date.setPreferredSize(new Dimension(460,45));
 		date.setFont(new Font("Segoe UI", Font.PLAIN, 22));
 		Date.setFont(new Font("Segoe UI", Font.PLAIN, 20));
@@ -238,7 +230,6 @@ public class UploadData{
 
 
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
