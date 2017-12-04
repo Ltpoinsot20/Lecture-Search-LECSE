@@ -2,6 +2,8 @@ package LECSE;
 
 import java.io.File;
 
+import javax.swing.JOptionPane;
+
 //import javax.sound.sampled.LineUnavailableException;
 //import net.sourceforge.javaflacencoder.FLACFileWriter;
 
@@ -30,7 +32,7 @@ public class wav_recognizer{
 	
 	public wav_recognizer(File soundFile) {
 		setAudioFile(soundFile);
-		System.out.println("Reading file: " + soundFile);
+		//System.out.println("Reading file: " + soundFile);
 	}
 	
 	/**
@@ -50,7 +52,7 @@ public class wav_recognizer{
 			int numChannels = inputWavFile.getNumChannels();
 			// set the maximum number of frames for a target file,
 			// based on the number of milliseconds assigned for each file
-			int maxFramesPerFile = (int) inputWavFile.getSampleRate() * 10;
+			int maxFramesPerFile = (int) inputWavFile.getSampleRate() * 6;
 
 			// Create a buffer of maxFramesPerFile frames
 			double[] buffer = new double[maxFramesPerFile * numChannels];
@@ -76,7 +78,7 @@ public class wav_recognizer{
 				fileCount++;
 
 				//String pos_resp = "";
-				System.out.println("Recognizing File " + fileCount);
+				//System.out.println("Recognizing File " + fileCount);
 				
 				GoogleResponse resp = rec.getRecognizedDataForWave("out" + fileCount + ".wav");
 				output = resp.getResponse();

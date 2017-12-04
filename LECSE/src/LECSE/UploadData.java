@@ -164,16 +164,7 @@ public class UploadData{
 			public void actionPerformed(ActionEvent e) {
 				String filepath = converter.getAudioFile();
 				tempfile = new File(filepath);
-				
-				if(tempfile.renameTo(new File(path +  File.separator + tempfile.getName()))) {
-				System.out.println("The file was moved succesfully!");
-				}
-				else {
-					System.out.println("Sorry! Something went wrong.");
-				}
-				text_writer writer = new text_writer(tempfile.getName(), path, Lecture.getText());
-				String output_text = writer.get_recognized_text();
-				writer.file_writer(output_text);
+				tempfile.renameTo(new File(path +  File.separator + tempfile.getName()));
 			}
 		});
 		// add file browsing
@@ -183,6 +174,10 @@ public class UploadData{
 		upload.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(frame, "Begining Speech to Text Conversion...");
+				text_writer writer = new text_writer(tempfile.getName(), path, Lecture.getText());
+				String output_text = writer.get_recognized_text();
+				writer.file_writer(output_text);
 				try {
 					if(Lecture.getText().length() != 0 && Course.getText().length() != 0 && Instructor.getText().length() != 0 && Date.getText().length() != 0) {
 						//Add the course and instructor to array in database + file if it doen't exist already
@@ -225,6 +220,8 @@ public class UploadData{
 					e1.printStackTrace();
 				}
 			}
+			
+			
 		});
 
 		//Add the file browsing button

@@ -47,6 +47,7 @@ public class text_writer{
 	public void file_writer(String content) {
 		BufferedWriter bw = null;
 		FileWriter fw = null;
+		//System.out.println(textfile_name);
 		filename = System.getProperty("user.home") + File.separator + "Documents" + File.separator + "LECSE"+ File.separator + "Text Files" + File.separator + textfile_name + ".txt";
 		
 

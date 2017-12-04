@@ -58,18 +58,20 @@ public class MediaGUI extends JPanel
 	public JTextField textField;
 	public JTextArea textArea;
 	String audioPath;
-	String audioName;
+	String audioName = "";
 	String textPath;
-	public JLabel label3 = new JLabel(audioName);
-
+	public JLabel label = new JLabel("Translated Text:");
+	int turn = 0;
 	static MyHighlightPainter myHighlightPainter = new MyHighlightPainter(Color.yellow);
+	AudioPlayer player;
 
 	/**
 	 * @param frame is the main frame that is used to display the MediaGUI JPanel
 	 * @throws FileNotFoundException
 	 * @throws IOException
+	 * @throws UnsupportedAudioFileException 
 	 */
-	public MediaGUI(JFrame frame) throws FileNotFoundException, IOException {
+	public MediaGUI(JFrame frame) throws FileNotFoundException, IOException{
 		Database db = new Database();		
 		db.loadUserInfo();
 		db.loadCourseInstructor();
@@ -177,7 +179,7 @@ public class MediaGUI extends JPanel
 				if (node.isLeaf()) {
 					String namename = node.getUserObject().toString();
 					String fileName = namename + ".txt";
-					label3.setText(namename);
+					//label.setText("Selected File: " + namename);
 					ArrayList<Lecture> lec = db.getLectures();
 					for(int i = 0; i < lec.size(); i++) {
 						if(namename.equals(lec.get(i).getFileName())) {
@@ -187,18 +189,19 @@ public class MediaGUI extends JPanel
 
 					//Setting the text area to display the file!!
 					try {
-						//textarea.setText(readText(fileName, textPath));
 						textarea.setText(readText(fileName, textPath, frame));
-						//Load audio file to audio player
-						String fullAudioName = audioPath + File.separator + audioName;
+						String fullAudioName = "";
+						fullAudioName = path + File.separator + "Audio Files" + File.separator + audioName;
 						setAudioPath(fullAudioName);
-						//System.out.println(fullAudioName);
+						player = new AudioPlayer(new File(getAudioPath()));
 
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
+					} catch (UnsupportedAudioFileException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 					}
-
 				} 
 			}
 		});
@@ -269,7 +272,7 @@ public class MediaGUI extends JPanel
 		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
 		// Label
-		JLabel label = new JLabel("Text Translation");
+		//JLabel label = new JLabel("Selected File:");
 		label.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		c.gridx = 1;
 		c.gridy = 1;
@@ -298,8 +301,6 @@ public class MediaGUI extends JPanel
 				String keyword = field.getText();
 				highlight(textarea, keyword);
 			}
-
-
 		});
 
 
@@ -312,6 +313,8 @@ public class MediaGUI extends JPanel
 
 		// Save Button
 		JButton saveButton = new JButton("Save");
+		saveButton.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+		saveButton.setPreferredSize(new Dimension(120,30));
 		saveButton.addActionListener(e->
 		{
 			String words = textarea.getText();
@@ -323,7 +326,7 @@ public class MediaGUI extends JPanel
 				DefaultMutableTreeNode node = (DefaultMutableTreeNode)
 						tree.getLastSelectedPathComponent();
 				if(node != null) {
-					String fileName = node.getUserObject().toString();
+					String fileName = System.getProperty("user.home") + File.separator + "Documents" + File.separator + "LECSE"+ File.separator + "Text Files" + File.separator + node.getUserObject().toString() + ".txt";
 					String content = words;
 					fw = new FileWriter(fileName);
 					bw = new BufferedWriter(fw);
@@ -365,6 +368,8 @@ public class MediaGUI extends JPanel
 
 		// Upload Button
 		JButton uploadButton = new JButton("Upload");
+		uploadButton.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+		uploadButton.setPreferredSize(new Dimension(120,30));
 		uploadButton.addActionListener(e->
 		{
 			try {
@@ -384,29 +389,41 @@ public class MediaGUI extends JPanel
 		add(uploadButton,c);
 
 		// Audioplayer button
-		JButton AudioButton = new JButton("PLAY");
+		JButton AudioButton = new JButton("PLAY/STOP");
+		AudioButton.setFont(new Font("Segoe UI", Font.PLAIN, 26));
+		AudioButton.setPreferredSize(new Dimension(200,50));
 		AudioButton.addActionListener(e->
 		{
-			AudioPlayer player;
-			try {
-				player = new AudioPlayer(new File(getAudioPath()));
-				player.run();
-			} 		
-			catch (IOException | UnsupportedAudioFileException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+			if(turn == 0) {
+				player.start();
+				turn = 1;
+			}
+			else {
+				player.cancel();
+				try {
+					player = new AudioPlayer(new File(getAudioPath()));
+				} catch (IOException | UnsupportedAudioFileException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				turn = 0;
 			}
 		});
-		c.gridx = 2;
-		c.gridy = 6;
-		c.insets = new Insets(70,10,0,0);
+		
+		c.gridx = 1;
+		c.gridy = 5;
+		c.insets = new Insets(50,0,0,0);
 		add(AudioButton,c);
+		
+		// Audioplayer pause button
+//		JButton PauseButton = new JButton("STOP");
+//		PauseButton.setFont(new Font("Segoe UI", Font.PLAIN, 26));
+//		PauseButton.setPreferredSize(new Dimension(150,45));
+//		c.gridx = 2;
+//		c.gridy = 5;
+//		c.insets = new Insets(50,100,0,0);
+//		add(PauseButton,c);
 
-		label3.setFont(new Font("Segoe UI", Font.PLAIN, 22));
-		c.gridx = 2;
-		c.gridy = 6;
-		c.insets = new Insets(70,90,0,0);
-		add(label3,c);
 	}	
 
 	/**
