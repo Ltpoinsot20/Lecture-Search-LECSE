@@ -280,7 +280,7 @@ public class ProfileGUI extends JPanel {
 						+ "Both the auido and text file will be sorted into files and saved to the "
 						+ "program so that you may access it later if you wish."
 						+ "To access the saved text files and audio files, go to 'This computer', followed by"
-						+ "'Documents', then 'LECSE'."
+						+ " 'Documents', then 'LECSE'."
 				);
 				
 		

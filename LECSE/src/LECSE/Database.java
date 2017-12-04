@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import groovy.ui.SystemOutputInterceptor;
 
 /**
- * @author Sigrid Sandström
+ * @author Sigrid 
  */
 public class Database {
 	//Attributes for user name and major and university
@@ -43,21 +43,12 @@ public class Database {
 
 	//Add name, major, university and sorter selection to the file
 	/**
-	 * @param name the user's name
-	 * @param major the user's major
-	 * @param university the user's university
-	 * @param sortSelect how the user want's to sort the lectures
-	 * By course: sortSelect == Course 
-	 * By instructor: sortSelect == Instructor
-	 * @throws IOException
-	 * @ This method saves user name, major, university and sorting selection to a text file
-	 */
-	/**
 	 * @param n the name of the user
 	 * @param m the user's major
 	 * @param u the user's university
 	 * @param s the user's sorting selection 
 	 * @throws IOException
+	 * @ This method saves user name, major, university and sorting selection to a text file
 	 */
 	public void addPersonalInfo(String n, String m, String u, String s) throws IOException {
 		//Set user name, major, university and sort selection

@@ -24,7 +24,7 @@ import javax.swing.UIManager;
 
 /**
  * @author Alex, Sigrid, Jordan, Lucas
- *
+ * @ This class is a popup that appears when the user wants to upload a file
  */
 public class UploadData{
 	private File tempfile;
@@ -247,8 +247,6 @@ public class UploadData{
 		frame.setResizable(true);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
-
-	} // end of main method
-	
-} // end of class
+	} 	
+}
 

@@ -206,7 +206,7 @@ public class MediaGUI extends JPanel
 			}
 		});
 
-		//************************************
+		//Add a delete feature on a right click
 		MouseAdapter ml = new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 
@@ -235,7 +235,6 @@ public class MediaGUI extends JPanel
 
 		};
 		tree.addMouseListener(ml);
-		//************************************
 
 		//Create the scroll pane and add the tree to it. 
 		JScrollPane treeView = new JScrollPane(tree);
@@ -308,7 +307,6 @@ public class MediaGUI extends JPanel
 		c.gridx = 1;
 		c.gridy = 2;
 		c.gridwidth = 2;
-		//c.insets = new Insets(2,10,10,10);
 		add(scroll, c);
 
 		// Save Button
@@ -378,17 +376,13 @@ public class MediaGUI extends JPanel
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			//frame.getContentPane().removeAll();
-			//frame.getContentPane().add(ud);
-			//frame.revalidate();
-
 		});
 		c.gridx = 2;
 		c.gridy = 4;
 		c.insets = new Insets(10,0,0,200);
 		add(uploadButton,c);
 
-		// Audioplayer button
+		// Audio player button
 		JButton AudioButton = new JButton("PLAY/STOP");
 		AudioButton.setFont(new Font("Segoe UI", Font.PLAIN, 26));
 		AudioButton.setPreferredSize(new Dimension(200,50));
@@ -414,16 +408,6 @@ public class MediaGUI extends JPanel
 		c.gridy = 5;
 		c.insets = new Insets(50,0,0,0);
 		add(AudioButton,c);
-		
-		// Audioplayer pause button
-//		JButton PauseButton = new JButton("STOP");
-//		PauseButton.setFont(new Font("Segoe UI", Font.PLAIN, 26));
-//		PauseButton.setPreferredSize(new Dimension(150,45));
-//		c.gridx = 2;
-//		c.gridy = 5;
-//		c.insets = new Insets(50,100,0,0);
-//		add(PauseButton,c);
-
 	}	
 
 	/**
@@ -522,41 +506,32 @@ public class MediaGUI extends JPanel
 	}
 
 	/**
-	 * Uploads an audio file to the system.
-	 * @param fileName Name of the file to be uploaded.
-	 * @return The clip is the audio from the file
+	 * @param audioName the name of the audio file
+	 * @ This method sets the name of the audio file
 	 */
-	public Clip uploadAudio(String fileName)
-	{
-		Clip in = null;
-
-		try
-		{
-			AudioInputStream audioIn = AudioSystem.getAudioInputStream(getClass().getResource(fileName));
-			in = AudioSystem.getClip();
-			in.open( audioIn );
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-
-		return in;
-	}	
-
 	public void setAudioName(String audioName) {
 		this.audioName = audioName;
 
 	}
 
+	/**
+	 * @return This method return's the path for the audio file
+	 */
 	public String getAudioPath() {
 		return audioPath;
 	}
 
+	/**
+	 * @param audioPath the path of the audio file
+	 * @ This method sets the name of the path of the audio path
+	 */
 	public void setAudioPath(String audioPath) {
 		this.audioPath = audioPath;
 	}
 
+	/**
+	 * @return This method return's the path for the text file
+	 */
 	public String getTextPath() {
 		return textPath;
 	}
