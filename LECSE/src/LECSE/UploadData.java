@@ -174,7 +174,7 @@ public class UploadData{
 		upload.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(frame, "Begining Speech to Text Conversion...");
+				JOptionPane.showMessageDialog(frame, "Begining Speech to Text Conversion...\nThis may take a few minutes");
 				text_writer writer = new text_writer(tempfile.getName(), path, Lecture.getText());
 				String output_text = writer.get_recognized_text();
 				writer.file_writer(output_text);
