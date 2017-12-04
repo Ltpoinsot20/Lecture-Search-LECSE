@@ -55,7 +55,6 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  */
 public class MediaGUI extends JPanel
 {
-	////66666
 	public JTextField textField;
 	public JTextArea textArea;
 	String audioPath;
@@ -188,8 +187,13 @@ public class MediaGUI extends JPanel
 
 					//Setting the text area to display the file!!
 					try {
+<<<<<<< HEAD
 						textarea.setText(readText(fileName, textPath));
 
+=======
+						textarea.setText(readText(fileName, textPath, frame));
+						
+>>>>>>> 8abd9dd890a8026cf49f53a953f51aa67e66174a
 						//Load audio file to audio player
 						String fullAudioName = audioPath + File.separator + audioName;
 						setAudioPath(fullAudioName);
@@ -219,6 +223,7 @@ public class MediaGUI extends JPanel
 						String fileName = node.getUserObject().toString();
 						try {
 							db.removeLecture(fileName);
+							Popup pu = new Popup(frame);
 						} catch (IOException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
@@ -331,8 +336,6 @@ public class MediaGUI extends JPanel
 					UIManager.put("OptionPane.background", Color.white);
 					UIManager.put("Panel.background", Color.white);
 					JOptionPane.showMessageDialog(frame, "Text has been saved!");
-
-					//JOptionPane.showMessageDialog(null,"Text has been saved!","SetColor",JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 
@@ -417,7 +420,7 @@ public class MediaGUI extends JPanel
 	 * @return Returns the words from the file as a string
 	 * @throws IOException
 	 */
-	public static String readText(String fileName, String path) throws IOException
+	public static String readText(String fileName, String path, JFrame frame) throws IOException
 	{
 		// This will reference one line at a time
 		String line = null;
@@ -443,16 +446,15 @@ public class MediaGUI extends JPanel
 		}
 		catch(FileNotFoundException ex)
 		{
-			System.out.println(
-					"Unable to open file '" + 
-							fileName + "'");                
+			UIManager.put("OptionPane.background", Color.white);
+			UIManager.put("Panel.background", Color.white);
+			JOptionPane.showMessageDialog(frame, "Unable to open file '" + fileName + "'");              
 		}
 		catch(IOException ex) {
-			System.out.println(
-					"Error reading file '" 
-							+ fileName + "'");                  
-			// Or we could just do this: 
-			//ex.printStackTrace();
+			UIManager.put("OptionPane.background", Color.white);
+			UIManager.put("Panel.background", Color.white);
+			JOptionPane.showMessageDialog(frame, "Error reading file '" 
+					+ fileName + "'");              
 		}
 		return (word);
 	}

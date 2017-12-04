@@ -9,6 +9,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import groovy.ui.SystemOutputInterceptor;
+
 /**
  * @author Sigrid Sandström
  */
@@ -157,7 +159,6 @@ public class Database {
 				String instructorName = lectureArray.get(i).getInstructorName();
 				//Remove the lecture from the ArrayList
 				lectureArray.remove(i);
-
 				//If this is the last lecture associated with a course, delete the course and instructor
 				if(this.getCourseArrayList(courseName).size() == 0) {
 					this.removeCourseAndInstructor(courseName, instructorName);
@@ -187,9 +188,10 @@ public class Database {
 		lectureFile.delete();
 		tempFile.renameTo(lectureFile);
 		
-		//Delete the text file
-		
-
+		//Delete text file
+		String path = System.getProperty("user.home") + File.separator + "Documents" + File.separator + "LECSE" + File.separator + "Text Files";
+		File file = new File(path + File.separator + lectureID + ".txt");
+		file.delete();
 
 	}
 
@@ -377,6 +379,8 @@ public class Database {
 		}
 		br.close();
 	}
+
+
 	
 	/**
 	 * @param cn the name of a course
