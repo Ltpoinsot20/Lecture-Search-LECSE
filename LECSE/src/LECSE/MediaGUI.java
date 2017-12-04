@@ -187,13 +187,8 @@ public class MediaGUI extends JPanel
 
 					//Setting the text area to display the file!!
 					try {
-<<<<<<< HEAD
-						textarea.setText(readText(fileName, textPath));
-
-=======
+						//textarea.setText(readText(fileName, textPath));
 						textarea.setText(readText(fileName, textPath, frame));
-						
->>>>>>> 8abd9dd890a8026cf49f53a953f51aa67e66174a
 						//Load audio file to audio player
 						String fullAudioName = audioPath + File.separator + audioName;
 						setAudioPath(fullAudioName);
