@@ -5,10 +5,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-//import javax.sound.sampled.UnsupportedAudioFileException;
-//		AudioPlayer player = new AudioPlayer(soundFile);
-//		player.run();
-
 /**
  * @author Lucas Tijerina
  * The text_writer class is used to call the speech to text method from wav_recognizer

@@ -158,6 +158,8 @@ public class UploadData{
 		chooser.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		String path = System.getProperty("user.home") + File.separator + "Documents" + File.separator + "LECSE"+ File.separator + "Audio Files";
 		chooser.addActionListener(new ActionListener() {
+			
+			// Performs speech to text conversion when file is uploaded
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String filepath = converter.getAudioFile();

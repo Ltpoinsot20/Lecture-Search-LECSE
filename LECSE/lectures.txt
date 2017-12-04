@@ -1,5 +1,1 @@
-Nick Brixius,CEC470,Lecture1.txt,null,null,null,null
-Nick Brixius,CEC470,Lecture2.txt,null,null,null,null
-Keith Garfield,CS332,Lecture4.txt,null,null,null,null
-David Keck,SS325,Lecture3.wav,null,null,null,null
-David Keck,SS325,Lecture5.txt,null,null,null,null
+Lucas T.,Testing 101,Lucas1,null,wav_test.wav,null,NotToday!

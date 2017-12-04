@@ -46,10 +46,11 @@ import javax.swing.text.Highlighter;
 import javax.swing.text.JTextComponent;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 
 /**
- * @author Sigrid, Alex, Jordan
+ * @author Sigrid, Alex, Jordan, Lucas
  * @ This class is a JPanel that contains all the components of the media view
  */
 public class MediaGUI extends JPanel
@@ -60,6 +61,7 @@ public class MediaGUI extends JPanel
 	String audioPath;
 	String audioName;
 	String textPath;
+	public JLabel label3 = new JLabel(audioName);
 
 	static MyHighlightPainter myHighlightPainter = new MyHighlightPainter(Color.yellow);
 
@@ -174,11 +176,12 @@ public class MediaGUI extends JPanel
 
 
 				if (node.isLeaf()) {
-					String fileName = node.getUserObject().toString() + ".txt";
-					
+					String namename = node.getUserObject().toString();
+					String fileName = namename + ".txt";
+					label3.setText(namename);
 					ArrayList<Lecture> lec = db.getLectures();
 					for(int i = 0; i < lec.size(); i++) {
-						if(fileName.equals(lec.get(i).getFileName())) {
+						if(namename.equals(lec.get(i).getFileName())) {
 							audioName = lec.get(i).getAudioName();
 						}
 					}
@@ -186,10 +189,12 @@ public class MediaGUI extends JPanel
 					//Setting the text area to display the file!!
 					try {
 						textarea.setText(readText(fileName, textPath));
-						
+
 						//Load audio file to audio player
-						String fullAudioName = audioPath + audioName;
-						
+						String fullAudioName = audioPath + File.separator + audioName;
+						setAudioPath(fullAudioName);
+						//System.out.println(fullAudioName);
+
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -379,7 +384,32 @@ public class MediaGUI extends JPanel
 		c.gridy = 4;
 		c.insets = new Insets(10,0,0,200);
 		add(uploadButton,c);
-	}
+
+		// Audioplayer button
+		JButton AudioButton = new JButton("PLAY");
+		AudioButton.addActionListener(e->
+		{
+			AudioPlayer player;
+			try {
+				player = new AudioPlayer(new File(getAudioPath()));
+				player.run();
+			} 		
+			catch (IOException | UnsupportedAudioFileException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
+		c.gridx = 2;
+		c.gridy = 6;
+		c.insets = new Insets(70,10,0,0);
+		add(AudioButton,c);
+
+		label3.setFont(new Font("Segoe UI", Font.PLAIN, 22));
+		c.gridx = 2;
+		c.gridy = 6;
+		c.insets = new Insets(70,90,0,0);
+		add(label3,c);
+	}	
 
 	/**
 	 * Reads the text from a text file and returns the words as a string
@@ -498,10 +528,19 @@ public class MediaGUI extends JPanel
 		}
 
 		return in;
+	}	
+
+	public void setAudioName(String audioName) {
+		this.audioName = audioName;
+
 	}
 
 	public String getAudioPath() {
 		return audioPath;
+	}
+
+	public void setAudioPath(String audioPath) {
+		this.audioPath = audioPath;
 	}
 
 	public String getTextPath() {
