@@ -124,6 +124,7 @@ public class MediaGUI extends JPanel
 		add(textarea);
 		textarea.setEditable(true);
 		textarea.setLineWrap(true);
+		textarea.setWrapStyleWord(true);
 
 		//Create the root node
 		DefaultMutableTreeNode top = new DefaultMutableTreeNode("Lectures");
